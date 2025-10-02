@@ -17,8 +17,6 @@ namespace BarberBoss.Application.UseCases.Faturamentos.CreateFaturamento
 
         public async Task<CreateFaturamentoCommandResponse> Handle(CreateFaturamentoCommand request, CancellationToken cancellationToken)
         {
-            // Charmar a entidade de domínio para criar o objeto Faturamento
-            // A entidade garante que todas as regras de negócio sejam cumpridas.
             var faturamento = Faturamento.Create(
                 request.NomeCliente,
                 request.Data,
