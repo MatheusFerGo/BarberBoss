@@ -6,7 +6,7 @@ namespace BarberBoss.Domain.Interfaces
     {
         Task<Faturamento> GetByIdAsync(int id);
         Task<IEnumerable<Faturamento>> GetAllAsync();
-        Task AddAsync(Faturamento faturamento);
+        void Add(Faturamento faturamento);
         void Update(Faturamento faturamento);
         void Delete(Faturamento faturamento);
     }
