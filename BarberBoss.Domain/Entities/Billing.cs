@@ -6,7 +6,7 @@ namespace BarberBoss.Domain;
 
 public class Billing
 {
-    private Billing() { };
+    private Billing() { }
 
     public Billing (DateOnly date, string barberName, string clientName, string serviceName, decimal amount, PaymentMethod paymentMethod, BillingStatus status, string? notes)
     {
@@ -36,6 +36,21 @@ public class Billing
     public string? Notes { get; private set; } // '?' permite ser nulo (Não obrigatório)
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
+
+    public void Update(DateOnly date, string barberName, string clientName, string serviceName, decimal amount, PaymentMethod paymentMethod, BillingStatus status, string? notes)
+    {
+        Date = date;
+        BarberName = barberName;
+        ClientName = clientName;
+        ServiceName = serviceName;
+        Amount = amount;
+        PaymentMethod = paymentMethod;
+        Status = status;
+        Notes = notes;
+        UpdatedAt = DateTime.UtcNow;
+
+        Validate();
+    }
 
     public void Cancel()
     {
