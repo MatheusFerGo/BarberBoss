@@ -1,6 +1,6 @@
 ﻿using BarberBoss.Domain;
 
-namespace BarberBoss.Application;
+namespace BarberBoss.Application.Services.Billings;
 
 public class BillingService : IBillingService
 {

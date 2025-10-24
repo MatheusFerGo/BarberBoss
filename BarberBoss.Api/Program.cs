@@ -1,4 +1,7 @@
 using BarberBoss.Application;
+using BarberBoss.Application.Interfaces;
+using BarberBoss.Application.Services.Billings;
+using BarberBoss.Application.Services.Reports;
 using BarberBoss.Domain;
 using BarberBoss.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +19,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 IServiceCollection serviceCollection = builder.Services.AddScoped<IBillingService, BillingService>();
 
 builder.Services.AddScoped<IBillingRepository, BillingRepository>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IExcelService, ExcelService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

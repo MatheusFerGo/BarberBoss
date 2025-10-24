@@ -44,8 +44,14 @@ public class BillingRepository : IBillingRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task<IEnumerable<Billing>> GetPaidBillingsInPeriodAsync(DateOnly startDate, DateOnly endDate)
+    public async Task<IEnumerable<Billing>> GetPaidBillingsInPeriodAsync(DateOnly startDate, DateOnly endDate)
     {
-        throw new NotImplementedException();
+        return await _context.Billings
+            .AsNoTracking()
+            .Where(b => b.Status == BillingStatus.Pago &&
+                        b.Date >= startDate &&
+                        b.Date <= endDate)
+            .OrderBy(b => b.Date)
+            .ToListAsync();
     }
 }
