@@ -1,4 +1,5 @@
-﻿using BarberBoss.Domain;
+﻿using BarberBoss.Application.Interfaces.Billings;
+using BarberBoss.Domain;
 
 namespace BarberBoss.Application.Services.Billings;
 

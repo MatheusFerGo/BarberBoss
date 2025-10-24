@@ -1,4 +1,5 @@
 ﻿using BarberBoss.Application;
+using BarberBoss.Application.Interfaces.Billings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 

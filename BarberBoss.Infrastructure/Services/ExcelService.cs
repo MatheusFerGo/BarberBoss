@@ -1,4 +1,4 @@
-﻿using BarberBoss.Application.Interfaces;
+﻿using BarberBoss.Application.Interfaces.Reports;
 using BarberBoss.Domain;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Packaging;

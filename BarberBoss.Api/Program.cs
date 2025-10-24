@@ -1,5 +1,5 @@
-using BarberBoss.Application;
-using BarberBoss.Application.Interfaces;
+using BarberBoss.Application.Interfaces.Billings;
+using BarberBoss.Application.Interfaces.Reports;
 using BarberBoss.Application.Services.Billings;
 using BarberBoss.Application.Services.Reports;
 using BarberBoss.Domain;
@@ -21,6 +21,7 @@ IServiceCollection serviceCollection = builder.Services.AddScoped<IBillingServic
 builder.Services.AddScoped<IBillingRepository, BillingRepository>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IExcelService, ExcelService>();
+builder.Services.AddScoped<IPdfService, PdfService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

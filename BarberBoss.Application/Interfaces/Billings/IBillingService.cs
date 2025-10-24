@@ -1,4 +1,4 @@
-﻿namespace BarberBoss.Application;
+﻿namespace BarberBoss.Application.Interfaces.Billings;
 
 public interface IBillingService
 {

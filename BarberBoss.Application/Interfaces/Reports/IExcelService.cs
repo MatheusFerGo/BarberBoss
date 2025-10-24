@@ -1,6 +1,6 @@
 ﻿using BarberBoss.Domain;
 
-namespace BarberBoss.Application.Interfaces;
+namespace BarberBoss.Application.Interfaces.Reports;
 
 public interface IExcelService
 {
