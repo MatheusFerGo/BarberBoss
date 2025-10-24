@@ -2,5 +2,5 @@
 
 public interface IReportService
 {
-    Task<byte[]> GenerateWeeklyExcelReportAsync(DateOnly startDate, DateOnly endDate);
+    Task<byte[]> GenerateExcelReportAsync(DateOnly startDate, DateOnly endDate);
 }

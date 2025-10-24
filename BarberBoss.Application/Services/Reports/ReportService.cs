@@ -14,7 +14,7 @@ public class ReportService : IReportService
         _excelService = serviceRepository;
     }
 
-    public async Task<byte[]> GenerateWeeklyExcelReportAsync(DateOnly startDate, DateOnly endDate)
+    public async Task<byte[]> GenerateExcelReportAsync(DateOnly startDate, DateOnly endDate)
     {
         var paidBillings = await _billingRepository.GetPaidBillingsInPeriodAsync(startDate, endDate);
 
