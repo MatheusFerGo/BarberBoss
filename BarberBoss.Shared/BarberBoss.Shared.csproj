@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BarberBoss.Application.Tests\BarberBoss.Application.Tests.csproj" />
+    <ProjectReference Include="..\BarberBoss.Application\BarberBoss.Application.csproj" />
+    <ProjectReference Include="..\BarberBoss.Domain.Tests\BarberBoss.Domain.Tests.csproj" />
+    <ProjectReference Include="..\BarberBoss.Domain\BarberBoss.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Messages\" />
+  </ItemGroup>
+
+</Project>

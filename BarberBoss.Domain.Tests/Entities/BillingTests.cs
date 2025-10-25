@@ -1,4 +1,5 @@
 ﻿using BarberBoss.Domain.Enums;
+using BarberBoss.Domain.Extensions;
 using System.ComponentModel.DataAnnotations;
 
 namespace BarberBoss.Domain.Tests;
@@ -25,7 +26,7 @@ public class BillingTests
                 invalidAmount, _paymentMethod, _validStatus, null)
             );
 
-        Assert.Equal("Amount deve ser amior ou igual a zero.", exception.Message);
+        Assert.Equal(ResourceErrorMessages.AMOUNT_MUST_BE_POSITIVE, exception.Message);
     }
 
     [Fact]
@@ -37,7 +38,7 @@ public class BillingTests
                 _validDate, invalidBarberName, _validClientName, _validService,
                 _validAmount, _paymentMethod, _validStatus, null)
             );
-        Assert.Equal("BarberName não pode ser vazio.", exception.Message);
+        Assert.Equal(ResourceErrorMessages.BARBERNAME_IS_INVALID, exception.Message);
     }
 
     [Fact]
@@ -49,17 +50,36 @@ public class BillingTests
                 _validDate, _validBarberName, invalidClientName, _validService,
                 _validAmount, _paymentMethod, _validStatus, null)
             );
-        Assert.Equal("ClientName não pode ser vazio.", exception.Message);
+        Assert.Equal(ResourceErrorMessages.CLIENTNAME_IS_INVALID, exception.Message);
     }
 
     [Fact]
-    public void Should_SetAmountToZero_When_AmountIsZero()
+    public void Should_ThrowValidationException_When_PaidBillingHasZeroAmount()
     {
         decimal zeroAmount = 0.0m;
-        var billing = new Billing(
-            _validDate, _validBarberName, _validClientName, _validService,
-            zeroAmount, _paymentMethod, _validStatus, null);
-        Assert.Equal(BillingStatus.Cancelado, billing.Status);
-        Assert.Equal(0.0m, billing.Amount);
+        var paidStatus = BillingStatus.Pago;
+
+        var exception = Assert.Throws<ValidationException>(() =>
+            new Billing(
+                _validDate, _validBarberName, _validClientName, _validService,
+                zeroAmount, _paymentMethod, paidStatus, null)
+        );
+
+        Assert.Equal(ResourceErrorMessages.PAID_BILLING_MUST_BE_POSITIVE, exception.Message);
+    }
+
+    [Fact]
+    public void Should_ThrowValidationException_When_CanceledBillingHasNonZeroAmount()
+    {
+        decimal nonZeroAmount = 50.0m; // Valor > 0
+        var canceledStatus = BillingStatus.Cancelado; // Status Cancelado
+
+        var exception = Assert.Throws<ValidationException>(() =>
+            new Billing(
+                _validDate, _validBarberName, _validClientName, _validService,
+                nonZeroAmount, _paymentMethod, canceledStatus, null)
+        );
+
+        Assert.Equal(ResourceErrorMessages.CANCELED_BILLING_MUST_BE_ZERO, exception.Message);
     }
 }
