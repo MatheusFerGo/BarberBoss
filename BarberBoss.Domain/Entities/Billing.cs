@@ -1,4 +1,5 @@
 ﻿using BarberBoss.Domain.Enums;
+using BarberBoss.Domain.Extensions;
 using System.ComponentModel.DataAnnotations;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -62,24 +63,30 @@ public class Billing
     private void Validate()
     {
         if (string.IsNullOrWhiteSpace(BarberName) || BarberName.Length < 2 || BarberName.Length > 80)
-            throw new ValidationException("BarberName é obrigatório e deve ter entre 2 e 80 caracteres.");
+            throw new ValidationException(ResourceErrorMessages.BARBERNAME_IS_INVALID);
 
         if (string.IsNullOrWhiteSpace(ClientName) || ClientName.Length < 2 || ClientName.Length > 120)
-            throw new ValidationException("ClientName é obrigatório e deve ter entre 2 e 120 caracteres.");
+            throw new ValidationException(ResourceErrorMessages.CLIENTNAME_IS_INVALID);
 
         if (string.IsNullOrWhiteSpace(ServiceName) || ServiceName.Length < 2 || ServiceName.Length > 120)
-            throw new ValidationException("ServiceName é obrigatório e deve ter entre 2 e 120 caracteres.");
+            throw new ValidationException(ResourceErrorMessages.SERVICENAME_IS_INVALID);
 
         if (Amount < 0)
-            throw new ValidationException("Amount deve ser maior ou igual a zero.");
+            throw new ValidationException(ResourceErrorMessages.AMOUNT_MUST_BE_POSITIVE);
 
         if (Status == BillingStatus.Cancelado && Amount != 0)
-            throw new ValidationException("Faturamento Cancelado deve ter o valor 0.");
+            throw new ValidationException(ResourceErrorMessages.CANCELED_BILLING_MUST_BE_ZERO);
 
         if (Status == BillingStatus.Pago && Amount == 0)
-            throw new ValidationException("Faturamento Pago não pode ter valor 0.");
+            throw new ValidationException(ResourceErrorMessages.PAID_BILLING_MUST_BE_POSITIVE);
 
         if (Notes != null && Notes.Length > 500)
-            throw new ValidationException("Notes não pode exceder 500 caracteres.");
+            throw new ValidationException(ResourceErrorMessages.TOO_MANY_NOTES);
+
+        if (!Enum.IsDefined(typeof(PaymentMethod), PaymentMethod))
+            throw new ValidationException(ResourceErrorMessages.PAYMENT_METHOD_IS_INVALID);
+
+        if (!Enum.IsDefined(typeof(BillingStatus), Status))
+            throw new ValidationException(ResourceErrorMessages.BILLING_STATUS_IS_INVALID);
     }
 }
