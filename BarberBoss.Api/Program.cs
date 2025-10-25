@@ -1,3 +1,4 @@
+using BarberBoss.Api.Middleware;
 using BarberBoss.Application.Interfaces.Billings;
 using BarberBoss.Application.Interfaces.Reports;
 using BarberBoss.Application.Services.Billings;
@@ -36,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseAuthorization();
 
